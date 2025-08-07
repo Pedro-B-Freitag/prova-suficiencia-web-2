@@ -56,6 +56,10 @@ public class ComandaController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Deletar comanda", description = "Deletar comanda utilizando o ID indicado para efetuar a exclusão.")
     public ResponseEntity<?> delete(@PathVariable Long id) {
+        Comanda comanda = comandaService.findById(id);
+        if (comanda == null) {
+            return ResponseEntity.notFound().build();
+        }
         comandaService.delete(id);
         return ResponseEntity.ok().body("{\"success\":{\"text\":\"comanda removida\"}}");
     }
