@@ -1,5 +1,6 @@
 package pedro.freitag.RestApiFurb.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,13 +15,11 @@ import pedro.freitag.RestApiFurb.repository.AuthUsuarioRepository;
 @RequestMapping("/auth-usuarios")
 public class AuthUsuarioController {
 
-    private final AuthUsuarioRepository authUsuarioRepository;
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private AuthUsuarioRepository authUsuarioRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    public AuthUsuarioController(AuthUsuarioRepository authUsuarioRepository, PasswordEncoder passwordEncoder) {
-        this.authUsuarioRepository = authUsuarioRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
     @PostMapping("/admin")
     public ResponseEntity<String> criarAdmin(@RequestBody AuthUsuarioDTO dto) {
         if (authUsuarioRepository.findByUsername(dto.getUsername()).isPresent()) {
