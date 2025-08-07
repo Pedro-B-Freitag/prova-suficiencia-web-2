@@ -1,0 +1,1 @@
+Para utilizar a API, acessar http://localhost:8080/RestAPIFurb/swagger-ui/index.html . E, ao gerar uma requisição, realizar log-in com o usuário: user e a senha, o token que for gerado ao rodar a aplicação
