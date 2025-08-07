@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pedro.freitag.RestApiFurb.dto.ComandaDTO;
+import pedro.freitag.RestApiFurb.dto.UsuarioComandaDTO;
 import pedro.freitag.RestApiFurb.model.Comanda;
 import pedro.freitag.RestApiFurb.model.Produto;
 import pedro.freitag.RestApiFurb.model.Usuario;
@@ -27,8 +28,8 @@ public class ComandaController {
 
     @GetMapping
     @Operation(summary = "Buscar todas as comandas", description = "Busca todas as comandas, informando os dados do usuário que estiverem cadastrados para a comanda")
-    public ResponseEntity<List<Usuario>> getAll() {
-        return ResponseEntity.ok(comandaService.findAll().stream().map(Comanda::getUsuario).collect(Collectors.toList()));
+    public ResponseEntity<List<UsuarioComandaDTO>> getAll() {
+        return ResponseEntity.ok(comandaService.findAll().stream().map(x -> new UsuarioComandaDTO(x.getUsuario())).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
